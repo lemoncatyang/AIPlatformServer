@@ -3,8 +3,58 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Algorithm", "Algorithm", "{78BAEF75-85C7-42CA-A4F0-BEA307B17205}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogic", "BusinessLogic", "{5D5BA71B-E051-41E4-A60B-EF7248421C02}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlobStorage", "BlobStorage\BlobStorage.csproj", "{BF89ADE4-8333-4A1C-B0FB-A39856B35094}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{8FCA0365-E3A1-417A-9862-4E5668ACE30E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{AC0DAC2C-7BDA-45BA-AFC3-5D06D1A1C740}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseInitializer", "DatabaseInitializer\DatabaseInitializer.csproj", "{35BF8296-913F-4DBF-AE7E-A048D2CDAABD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{0FA87ACF-B372-4BD8-9549-4116807A84BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceRecognition", "FaceRecognition\FaceRecognition.csproj", "{4B65B52D-7A55-485B-873F-87C43E971675}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF89ADE4-8333-4A1C-B0FB-A39856B35094}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF89ADE4-8333-4A1C-B0FB-A39856B35094}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF89ADE4-8333-4A1C-B0FB-A39856B35094}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF89ADE4-8333-4A1C-B0FB-A39856B35094}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FCA0365-E3A1-417A-9862-4E5668ACE30E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FCA0365-E3A1-417A-9862-4E5668ACE30E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FCA0365-E3A1-417A-9862-4E5668ACE30E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FCA0365-E3A1-417A-9862-4E5668ACE30E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC0DAC2C-7BDA-45BA-AFC3-5D06D1A1C740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC0DAC2C-7BDA-45BA-AFC3-5D06D1A1C740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC0DAC2C-7BDA-45BA-AFC3-5D06D1A1C740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC0DAC2C-7BDA-45BA-AFC3-5D06D1A1C740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35BF8296-913F-4DBF-AE7E-A048D2CDAABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35BF8296-913F-4DBF-AE7E-A048D2CDAABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35BF8296-913F-4DBF-AE7E-A048D2CDAABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35BF8296-913F-4DBF-AE7E-A048D2CDAABD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FA87ACF-B372-4BD8-9549-4116807A84BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FA87ACF-B372-4BD8-9549-4116807A84BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FA87ACF-B372-4BD8-9549-4116807A84BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FA87ACF-B372-4BD8-9549-4116807A84BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B65B52D-7A55-485B-873F-87C43E971675}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B65B52D-7A55-485B-873F-87C43E971675}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B65B52D-7A55-485B-873F-87C43E971675}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B65B52D-7A55-485B-873F-87C43E971675}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BF89ADE4-8333-4A1C-B0FB-A39856B35094} = {5D5BA71B-E051-41E4-A60B-EF7248421C02}
+		{4B65B52D-7A55-485B-873F-87C43E971675} = {78BAEF75-85C7-42CA-A4F0-BEA307B17205}
 	EndGlobalSection
 EndGlobal

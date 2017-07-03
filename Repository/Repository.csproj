@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net452</TargetFramework>
+    <RuntimeIdentifier>win7-x86</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\AIPlatform\DatabaseInitializer\DatabaseInitializer.csproj" />
+    <ProjectReference Include="..\..\AIPlatform\Model\Model.csproj" />
+  </ItemGroup>
+
+</Project>
