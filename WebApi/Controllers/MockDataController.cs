@@ -19,7 +19,7 @@ namespace WebApi.Controllers
         [AllowAnonymous]
         public async Task AddUsers()
         {
-            if (!UnitOfWork.ApplicationDbContext.ApplicationUsers.Any())
+            if (!UnitOfWork.Users.Any())
             {
                 var admin = new ApplicationUser
                 {

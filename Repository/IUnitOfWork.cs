@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 using DatabaseInitializer;
+using Model;
 
 namespace Repository
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
-        ApplicationDbContext ApplicationDbContext { get; set; }
+        void Complete();
+
+        IUserFileRepository UserFiles { get; }
+
+        IRepository<ApplicationUser> Users { get; }
     }
 }
