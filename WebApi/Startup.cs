@@ -1,4 +1,5 @@
-﻿using AspNet.Security.OpenIdConnect.Primitives;
+﻿using System.IO;
+using AspNet.Security.OpenIdConnect.Primitives;
 using BlobStorage;
 using DatabaseInitializer;
 using FaceRecognition;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Model;
 using Repository;
@@ -33,7 +35,6 @@ namespace WebApi
             // Add framework services.
             services.AddCors();
             services.AddMvc();
-
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(Configuration["Data:ConnectionString"]);
@@ -92,6 +93,8 @@ namespace WebApi
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseCors(builder =>
             {
                 builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
@@ -99,9 +102,8 @@ namespace WebApi
             app.UseDeveloperExceptionPage();
             app.UseOAuthValidation();
             app.UseOpenIddict();
-            app.UseMvc();
-            app.UseWelcomePage();
 
+            app.UseMvc();
             // SeedData.EnsurePopulated(app);
         }
     }
