@@ -104,7 +104,8 @@ namespace WebApi
             app.UseOpenIddict();
 
             app.UseMvc();
-            // SeedData.EnsurePopulated(app);
+            var context = app.ApplicationServices.GetRequiredService<ApplicationDbContext>();
+            context.Database.Migrate();
         }
     }
 }
