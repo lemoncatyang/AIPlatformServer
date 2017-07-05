@@ -1,41 +1,44 @@
-﻿
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-using System.Threading.Tasks;
-using BlobStorage;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using Model;
 using Repository;
+using WebApi.ViewModels;
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
     public class AccountController : BaseApiController
     {
-
-
-        [HttpGet("register")]
+        [HttpPost("register")]
         [AllowAnonymous]
-        public async Task Register()
+        public async Task Register(CreateUserModel userModel)
         {
-            var admin = new ApplicationUser
+            if (ModelState.IsValid)
             {
-                UserName = "admin",
-                PhoneNumber = "123456789",
-            };
-            var result = await UserMananger.CreateAsync(admin, "abc@1234");
 
-            var role = new ApplicationRole
-            {
-                Name = "Administrator"
-            };
+                var user = new ApplicationUser
+                {
+                    UserName = userModel.UserName,
+                    IdentityNumber = UnitOfWork.Users.GetIdentityNumber(),
+                    Name = userModel.NickName
+                };
 
-            result = await RoleManager.CreateAsync(role);
+                await UserManager.CreateAsync(user, userModel.Password);
+
+                var role = await RoleManager.FindByNameAsync("User");
+                if (role == null)
+                {
+                    role = new ApplicationRole
+                    {
+                        Name = "User"
+                    };
+                    await RoleManager.CreateAsync(role);
+                }
+
+                await UserManager.AddToRoleAsync(user, role.Name);
+            }
         }
 
         public AccountController(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager) : base(unitOfWork, userManager, roleManager)

@@ -12,5 +12,7 @@ namespace Repository
         List<string> GetFileNameList(string id);
 
         UserFile GetUserFileBasedOnUserIdAndGuidName(string guidName);
+
+        List<UserFile> GetUserAllFiles(string id);
     }
 }

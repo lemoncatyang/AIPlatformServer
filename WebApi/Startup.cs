@@ -1,6 +1,7 @@
 ﻿using AspNet.Security.OpenIdConnect.Primitives;
 using BlobStorage;
 using DatabaseInitializer;
+using FaceRecognition;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -50,7 +51,7 @@ namespace WebApi
                 options.ClaimsIdentity.RoleClaimType = OpenIdConnectConstants.Claims.Role;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequiredLength = 8;
+                options.Password.RequiredLength = 3;
             });
 
             // Register the OpenIddict services.
@@ -83,6 +84,7 @@ namespace WebApi
             services.AddOptions();
             services.Configure<BlobStorageConfiguration>(Configuration.GetSection("BlobStorageConfiguration"));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IFaceRecognitionProcessor, FaceRecognitionProcessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

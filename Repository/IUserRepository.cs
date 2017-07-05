@@ -9,5 +9,8 @@ namespace Repository
 {
     public interface IUserRepository : IRepository<ApplicationUser>
     {
+        int GetIdentityNumber();
+
+        string GetUserNameBasedOnIdentityNumber(int identityNumber);
     }
 }

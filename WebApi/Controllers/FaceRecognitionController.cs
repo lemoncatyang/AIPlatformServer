@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BlobStorage;
@@ -22,16 +24,40 @@ namespace WebApi.Controllers
     public class FaceRecognitionController : BlobAiController
     {
         [HttpPost("FaceRecognition")]
-        public async Task FaceRecognition(IFormFile file)
+        public RecognitionResult FaceRecognition(IFormFile file)
         {
+            var bitmaps = new List<Bitmap>();
+            var storageAccount = CloudStorageAccount.Parse(BlobStorageConfiguration.ConnectionString);
+            var blobClient = storageAccount.CreateCloudBlobClient();
+            var users = UnitOfWork.Users.GetAll().ToList();
+            var labels = new List<int>();
 
-            
-        }
+            users.ForEach(u =>
+            {
+                var container = blobClient.GetContainerReference(u.Id);
+                var filesInfo = UnitOfWork.UserFiles.GetUserAllFiles(u.Id);
+                filesInfo.ForEach(f =>
+                {
+                    var blockBlob = container.GetBlockBlobReference(f.GuidName.ToString());
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        blockBlob.DownloadToStream(memoryStream);
+                        // var file =  File(memoryStream.GetBuffer(), f.ContentType);
+                        bitmaps.Add(new Bitmap(memoryStream));
+                    }
+                    labels.Add(u.IdentityNumber);
+                });
+            });
 
-        [HttpGet("TraningBeforeTest")]
-        public async Task TranningBeforeTest()
-        {
-            
+
+            //// 处理用户上传的测试数据
+            using (var fileStream = file.OpenReadStream())
+            {
+                var testBitmap = new Bitmap(fileStream);
+                var result = FaceRecognitionProcessor.FaceRecognition(bitmaps, testBitmap, labels.ToArray());
+                result.PredictedUserName = UnitOfWork.Users.GetUserNameBasedOnIdentityNumber(result.Predicted);
+                return result;
+            }
         }
 
         [HttpGet("CurrentUserRelatedPhotosList")]
@@ -87,7 +113,7 @@ namespace WebApi.Controllers
             return Ok();
         }
 
-        public FaceRecognitionController(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IOptions<BlobStorageConfiguration> config) : base(unitOfWork, userManager, roleManager, config)
+        public FaceRecognitionController(IUnitOfWork unitOfWork, IFaceRecognitionProcessor processor, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IOptions<BlobStorageConfiguration> config) : base(unitOfWork, processor, userManager, roleManager, config)
         {
         }
     }

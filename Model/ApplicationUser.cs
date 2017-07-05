@@ -8,5 +8,7 @@ namespace Model
     public class ApplicationUser : IdentityUser
     {
         public int IdentityNumber { get; set; }
+
+        public string Name { get; set; }
     }
 }

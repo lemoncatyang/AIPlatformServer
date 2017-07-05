@@ -32,11 +32,11 @@ namespace WebApi.Controllers
                 {
                     Name = ApplicationRoleType.Administrator.ToString()
                 };
-                var result1 = await UserMananger.CreateAsync(admin, "yang03292");
+                var result1 = await UserManager.CreateAsync(admin, "yang03292");
 
                 var result2 = await RoleManager.CreateAsync(adminRole);
 
-                var result3 = await UserMananger.AddToRoleAsync(admin, adminRole.Name);
+                var result3 = await UserManager.AddToRoleAsync(admin, adminRole.Name);
             }
         }
 

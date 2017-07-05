@@ -16,17 +16,17 @@ namespace WebApi.Controllers
     {
         protected IUnitOfWork UnitOfWork { get; set; }
 
-        protected UserManager<ApplicationUser> UserMananger;
+        protected UserManager<ApplicationUser> UserManager;
 
         protected RoleManager<ApplicationRole> RoleManager;
 
         public BaseApiController(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
             UnitOfWork = unitOfWork;
-            UserMananger = userManager;
+            UserManager = userManager;
             RoleManager = roleManager;
         }
 
-        protected async Task<ApplicationUser> GetCurrentUserAsync() => await UserMananger.GetUserAsync(HttpContext.User);
+        protected async Task<ApplicationUser> GetCurrentUserAsync() => await UserManager.GetUserAsync(HttpContext.User);
     }
 }

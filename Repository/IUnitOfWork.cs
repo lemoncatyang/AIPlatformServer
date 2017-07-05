@@ -12,6 +12,6 @@ namespace Repository
 
         IUserFileRepository UserFiles { get; }
 
-        IRepository<ApplicationUser> Users { get; }
+        IUserRepository Users { get; }
     }
 }

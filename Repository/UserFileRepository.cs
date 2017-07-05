@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DatabaseInitializer;
 using Model;
 
@@ -16,7 +13,12 @@ namespace Repository
 
         public List<string> GetFileNameList(string id)
         {
-            return Context.UserFiles.OrderBy(u => u.UserId).Select(u => u.GuidName.ToString()).ToList();
+            return Context.UserFiles.Where(u => u.UserId == id).Select(u => u.GuidName.ToString()).ToList();
+        }
+
+        public List<UserFile> GetUserAllFiles(string id)
+        {
+            return Context.UserFiles.Where(u => u.UserId == id).ToList();
         }
 
         public UserFile GetUserFileBasedOnUserIdAndGuidName(string guidName)

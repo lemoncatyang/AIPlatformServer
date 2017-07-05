@@ -11,7 +11,7 @@ namespace Repository
         private readonly ApplicationDbContext _applicationDbContext;
 
         public IUserFileRepository UserFiles { get; }
-        public IRepository<ApplicationUser> Users { get; }
+        public IUserRepository Users { get; }
 
         public UnitOfWork(ApplicationDbContext applicationDbContext)
         {

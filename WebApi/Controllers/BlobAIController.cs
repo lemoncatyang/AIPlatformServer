@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BlobStorage;
+using FaceRecognition;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -23,12 +24,15 @@ namespace WebApi.Controllers
 
         protected BlobStorageConfiguration BlobStorageConfiguration;
 
-        public BlobAiController(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IOptions<BlobStorageConfiguration> config)
+        protected IFaceRecognitionProcessor FaceRecognitionProcessor { get; set; }
+
+        public BlobAiController(IUnitOfWork unitOfWork, IFaceRecognitionProcessor faceRecognitionProcessor, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IOptions<BlobStorageConfiguration> config)
         {
             UnitOfWork = unitOfWork;
             UserMananger = userManager;
             RoleManager = roleManager;
             BlobStorageConfiguration = config.Value;
+            FaceRecognitionProcessor = faceRecognitionProcessor;
         }
 
         protected async Task<ApplicationUser> GetCurrentUserAsync() => await UserMananger.GetUserAsync(HttpContext.User);
