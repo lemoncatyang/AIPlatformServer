@@ -25,7 +25,7 @@ namespace WebApi.Controllers
                     Name = userModel.NickName
                 };
 
-                await UserManager.CreateAsync(user, userModel.Password);
+                var result = await UserManager.CreateAsync(user, userModel.Password);
 
                 var role = await RoleManager.FindByNameAsync("User");
                 if (role == null)
@@ -34,10 +34,10 @@ namespace WebApi.Controllers
                     {
                         Name = "User"
                     };
-                    await RoleManager.CreateAsync(role);
+                    result = await RoleManager.CreateAsync(role);
                 }
 
-                await UserManager.AddToRoleAsync(user, role.Name);
+                result = await UserManager.AddToRoleAsync(user, role.Name);
             }
         }
 

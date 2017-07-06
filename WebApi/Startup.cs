@@ -1,5 +1,4 @@
-﻿using System.IO;
-using AspNet.Security.OpenIdConnect.Primitives;
+﻿using AspNet.Security.OpenIdConnect.Primitives;
 using BlobStorage;
 using DatabaseInitializer;
 using FaceRecognition;
@@ -8,7 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Model;
 using Repository;
@@ -93,8 +91,6 @@ namespace WebApi
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
             app.UseCors(builder =>
             {
                 builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
@@ -104,6 +100,7 @@ namespace WebApi
             app.UseOpenIddict();
 
             app.UseMvc();
+            app.UseWelcomePage();
             var context = app.ApplicationServices.GetRequiredService<ApplicationDbContext>();
             context.Database.Migrate();
         }
